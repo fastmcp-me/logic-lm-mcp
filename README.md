@@ -17,29 +17,51 @@ This MCP server adapts the Logic-LLM approach for integration with Claude Code a
 
 ### Prerequisites
 - Python 3.8 or higher
-- pip (Python package installer)
 
 ### Installation
 
-1. **Clone the repository:**
+Choose your preferred installation method:
+
+#### Option 1: Install from PyPI (Recommended)
 ```bash
-git clone https://github.com/yourusername/logic-lm-mcp-server.git
+# Install with pip
+pip install logic-lm-mcp-server
+
+# Or install with uv (10-100x faster)
+uv pip install logic-lm-mcp-server
+```
+
+#### Option 2: Install with Clingo solver (for full functionality)
+```bash
+# Install with optional solver
+pip install logic-lm-mcp-server[solver]
+
+# Or with uv
+uv pip install logic-lm-mcp-server[solver]
+```
+
+#### Option 3: Development Installation
+```bash
+git clone https://github.com/stevenwangbe/logic-lm-mcp-server.git
 cd logic-lm-mcp-server
+pip install -e .
 ```
 
-2. **Install dependencies:**
+### Test Installation
 ```bash
-pip install -r requirements.txt
-```
-
-3. **Test the installation:**
-```bash
-python -c "from src.main import mcp; print('✅ Logic-LM MCP Server ready!')"
+logic-lm-mcp --help
 ```
 
 ### Integration with Claude Code
 
-1. **Add to your Claude Code configuration:**
+After installing the package, add it to your Claude Code configuration:
+
+**Method 1: Using the console command (after PyPI installation)**
+```bash
+claude mcp add logic-lm-mcp logic-lm-mcp
+```
+
+**Method 2: Manual configuration**
 
 Edit `~/.config/claude/claude_desktop_config.json` (create if it doesn't exist):
 
@@ -47,17 +69,13 @@ Edit `~/.config/claude/claude_desktop_config.json` (create if it doesn't exist):
 {
   "mcpServers": {
     "logic-lm": {
-      "command": "python",
-      "args": ["/absolute/path/to/logic-lm-mcp-server/start_server.py"],
-      "cwd": "/absolute/path/to/logic-lm-mcp-server"
+      "command": "logic-lm-mcp"
     }
   }
 }
 ```
 
-**Important:** Replace `/absolute/path/to/logic-lm-mcp-server` with your actual path. Use `pwd` in the repository directory to get the absolute path.
-
-2. **Restart Claude Code** to load the new MCP server.
+**Restart Claude Code** to load the new MCP server.
 
 3. **Test the integration:**
 

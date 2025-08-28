@@ -12,8 +12,8 @@ from pydantic import BaseModel, Field
 
 from fastmcp import FastMCP
 
-from logic_framework import LogicFramework, LogicResult
-from asp_templates import ASPTemplateLibrary
+from .logic_framework import LogicFramework, LogicResult
+from .asp_templates import ASPTemplateLibrary
 
 
 # Initialize the MCP server

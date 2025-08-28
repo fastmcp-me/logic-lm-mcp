@@ -1,11 +1,9 @@
 """
-Logic-LM MCP Server
+Logic-LM MCP Server Package
 
-A Model Context Protocol (MCP) server that provides symbolic reasoning capabilities
-using Logic-LM framework and Answer Set Programming (ASP).
+A Model Context Protocol server that provides symbolic reasoning capabilities
+using Logic-LM framework and Answer Set Programming.
 """
-
-__version__ = "0.1.0"
 
 from .logic_framework import LogicFramework, LogicResult, ClingoSolver
 from .asp_templates import ASPTemplateLibrary, ASPTemplate
