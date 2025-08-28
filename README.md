@@ -262,12 +262,13 @@ Output: "Yes, X is in set B. This follows from set inclusion transitivity..."
 
 ### Basic Functionality Test
 ```bash
-python test_basic.py
+logic-lm-mcp --help
 ```
 
-### Full Setup Test (if MCP dependencies available)
+### Test MCP Integration
 ```bash
-python test_setup.py
+# Test with Claude Code
+claude mcp get logic-lm
 ```
 
 ## Error Handling
@@ -297,15 +298,15 @@ python test_setup.py
 
 3. **Server fails to start**
    - Check Python version: `python --version` (requires 3.8+)
-   - Run basic test: `python test_basic.py`
+   - Test installation: `logic-lm-mcp --help`
 
 4. **MCP connection issues**
-   - Ensure you're running the correct startup script: `python start_server.py`
-   - Check that no other process is using the same port
+   - Verify MCP server configuration: `claude mcp get logic-lm`
+   - Check installation: `logic-lm-mcp --help`
 
 ### Getting Help
 
-1. Run the basic test to isolate issues: `python test_basic.py`
+1. Test installation: `logic-lm-mcp --help`
 2. Check the health endpoint: use `check_solver_health` tool
 3. Enable debug traces: set `include_trace=true` in requests
 
@@ -582,29 +583,28 @@ pip install -r requirements.txt
 logic-lm-mcp-server/
 ├── src/
 │   ├── __init__.py           # Package initialization
-│   ├── main.py               # FastMCP server implementation
-│   ├── logic_framework.py    # Core Logic-LM framework
-│   └── asp_templates.py      # ASP template library
+│   ├── logic_lm_mcp/
+│   │   ├── __init__.py       # Package initialization
+│   │   ├── main.py           # FastMCP server implementation
+│   │   ├── logic_framework.py # Core Logic-LM framework
+│   │   └── asp_templates.py   # ASP template library
+├── pyproject.toml            # Modern Python packaging
 ├── requirements.txt          # Python dependencies
-├── setup.py                 # Package setup
-├── start_server.py          # Recommended startup script
-├── run.py                   # Alternative startup script
-├── test_basic.py            # Basic functionality tests
-├── test_setup.py            # Full setup tests
-└── README.md               # This file
+├── start_server.py          # Development server startup
+└── README.md               # This documentation
 ```
 
 ### Adding New Templates
 
-1. Edit `src/asp_templates.py`
+1. Edit `src/logic_lm_mcp/asp_templates.py`
 2. Add new template to `_initialize_templates()` method
-3. Test with `python test_basic.py`
+3. Test with `logic-lm-mcp --help` and MCP tools
 
 ### Extending Logic Framework
 
-1. Edit `src/logic_framework.py`
+1. Edit `src/logic_lm_mcp/logic_framework.py`
 2. Add new reasoning methods to `LogicFramework` class
-3. Update FastMCP tools in `src/main.py`
+3. Update FastMCP tools in `src/logic_lm_mcp/main.py`
 
 ## Resources
 
@@ -631,10 +631,10 @@ MIT License - See LICENSE file for details.
 
 For issues, feature requests, or questions about Logic-LM reasoning capabilities, please:
 
-1. Run `python test_basic.py` to verify basic functionality
+1. Test installation: `logic-lm-mcp --help`
 2. Check the troubleshooting section above
 3. Open an issue in the repository with:
    - Python version
    - Operating system
    - Error messages
-   - Output of basic test
+   - Installation method used (pip/uv)
