@@ -22,7 +22,7 @@ This MCP server adapts the Logic-LLM approach for integration with Claude Code a
 
 Choose your preferred installation method:
 
-#### Option 1: Install from PyPI (Recommended)
+#### Option 1: Install from PyPI (Recommended) ✅ **LIVE ON PYPI**
 ```bash
 # Install with pip
 pip install logic-lm-mcp-server
@@ -30,6 +30,8 @@ pip install logic-lm-mcp-server
 # Or install with uv (10-100x faster)
 uv pip install logic-lm-mcp-server
 ```
+
+📦 **Package URL:** https://pypi.org/project/logic-lm-mcp-server/
 
 #### Option 2: Install with Clingo solver (for full functionality)
 ```bash
@@ -370,27 +372,66 @@ pip install pydantic>=2.0.0
 pip install -r requirements.txt
 ```
 
-### Virtual environment activation issues
+### Virtual environment using system Python instead of venv Python
 
-**Error:** Commands work outside venv but fail inside venv.
+**Error:** Virtual environment is using the system Python instead of the isolated venv Python.
 
-**Cause:** Virtual environment path or activation issues.
+**Symptoms:**
+- Packages installed globally instead of in venv
+- Permission errors during package installation
+- `which python` shows system path after activation
+- Inconsistent behavior between development and production
 
-**Solution:**
+**Causes:**
+- Incorrect virtual environment activation
+- Shell aliases overriding PATH (alias python, alias python3)
+- Corrupted virtual environment
+- PATH configuration issues
+
+**Solutions:**
+
+**Option 1: Verify and fix activation**
 ```bash
-# Recreate clean virtual environment
-rm -rf venv/ test_env/
-python3 -m venv venv
-
-# Activate properly (Linux/Mac)
+# Check if activation worked properly
 source venv/bin/activate
+which python  # Should show venv/bin/python, not /usr/bin/python
 
-# Activate properly (Windows)
-venv\Scripts\activate
+# If still showing system python, check for aliases
+alias python
+alias python3
 
-# Verify activation
-which python  # Should show venv/bin/python
-pip install -r requirements.txt
+# Remove problematic aliases
+unalias python
+unalias python3
+```
+
+**Option 2: Use explicit venv path (most reliable)**
+```bash
+# Instead of relying on activation, use direct paths
+venv/bin/python -c "import sys; print(sys.executable)"
+venv/bin/pip install package-name
+
+# For our package specifically
+venv/bin/python -c "from logic_lm_mcp import LogicFramework; print('✅ Works!')"
+```
+
+**Option 3: Recreate virtual environment**
+```bash
+# Clean recreation if venv is corrupted
+rm -rf venv/
+python3 -m venv venv
+source venv/bin/activate
+which python  # Verify it shows venv/bin/python
+pip install logic-lm-mcp-server
+```
+
+**Option 4: Use absolute paths in shell**
+```bash
+# For Linux/Mac
+/full/path/to/venv/bin/python script.py
+
+# For Windows  
+C:\full\path\to\venv\Scripts\python.exe script.py
 ```
 
 ### "Clingo not available" but everything else works
