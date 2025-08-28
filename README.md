@@ -2,6 +2,17 @@
 
 A Model Context Protocol (MCP) server that provides symbolic reasoning capabilities using Logic-LM framework and Answer Set Programming (ASP).
 
+## Attribution
+
+This implementation is inspired by and builds upon the Logic-LLM framework:
+
+**Original Research:**
+- **Paper:** [Logic-LLM: Empowering Large Language Models with Symbolic Solvers for Faithful Logical Reasoning](https://arxiv.org/abs/2305.12295)
+- **Repository:** [teacherpeterpan/Logic-LLM](https://github.com/teacherpeterpan/Logic-LLM)
+- **Authors:** Liangming Pan, Alon Albalak, Xinyi Wang, William Yang Wang
+
+This MCP server adapts the Logic-LLM approach for integration with Claude Code and other MCP clients, providing LLM-collaborative symbolic reasoning through Answer Set Programming.
+
 ## Quick Start
 
 ### 1. Install Dependencies
