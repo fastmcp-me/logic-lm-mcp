@@ -5,7 +5,7 @@ A Model Context Protocol (MCP) server that provides symbolic reasoning capabilit
 using Logic-LM framework and Answer Set Programming (ASP).
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 
 from .logic_framework import LogicFramework, LogicResult, ClingoSolver
 from .asp_templates import ASPTemplateLibrary, ASPTemplate
