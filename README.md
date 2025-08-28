@@ -13,22 +13,72 @@ This implementation is inspired by and builds upon the Logic-LLM framework:
 
 This MCP server adapts the Logic-LLM approach for integration with Claude Code and other MCP clients, providing LLM-collaborative symbolic reasoning through Answer Set Programming.
 
-## Quick Start
+## 🚀 Quick Start
 
-### 1. Install Dependencies
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package installer)
+
+### Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/logic-lm-mcp-server.git
+cd logic-lm-mcp-server
+```
+
+2. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Test the Setup
+3. **Test the installation:**
 ```bash
-python test_basic.py
+python -c "from src.main import mcp; print('✅ Logic-LM MCP Server ready!')"
 ```
 
-### 3. Start the Server
+### Integration with Claude Code
+
+1. **Add to your Claude Code configuration:**
+
+Edit `~/.config/claude/claude_desktop_config.json` (create if it doesn't exist):
+
+```json
+{
+  "mcpServers": {
+    "logic-lm": {
+      "command": "python",
+      "args": ["/absolute/path/to/logic-lm-mcp-server/start_server.py"],
+      "cwd": "/absolute/path/to/logic-lm-mcp-server"
+    }
+  }
+}
+```
+
+**Important:** Replace `/absolute/path/to/logic-lm-mcp-server` with your actual path. Use `pwd` in the repository directory to get the absolute path.
+
+2. **Restart Claude Code** to load the new MCP server.
+
+3. **Test the integration:**
+
+Try these commands in Claude Code:
+```
+Check Logic-LM server health
+Translate this logic problem to ASP: "All birds can fly. Penguins are birds. Can penguins fly?"
+```
+
+### Alternative Integration (Other MCP Clients)
+
+For other MCP-compatible tools, start the server manually:
 ```bash
 python start_server.py
 ```
+
+The server will run on stdio and provide these tools:
+- `get_asp_guidelines` - Get ASP translation guidelines
+- `translate_to_asp_instructions` - Get problem-specific ASP guidance
+- `verify_asp_program` - Execute ASP programs with Clingo
+- `check_solver_health` - Verify system health
 
 ## Overview
 
